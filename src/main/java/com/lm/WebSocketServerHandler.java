@@ -252,7 +252,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
     }
 
     if (CLIENT_NAMES.containsKey(channel)) {
-      channel.write(new TextWebSocketFrame("14:Логин занят"));
+      channel.write(new TextWebSocketFrame("12:Вы уже авторизованы"));
       return;
     }
 
@@ -268,7 +268,8 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
     }
 
     CLIENT_NAMES.put(channel, login);
-    channel.write(new TextWebSocketFrame("14:Логин занят"));
+    channel.write(new TextWebSocketFrame("10:Вы авторизовались как " + login +
+      ". Теперь Вы можете запрашивать у сервера выполнение математических операций."));
   }
 
   private void calculate(Channel channel, String request, Operation operation) {
